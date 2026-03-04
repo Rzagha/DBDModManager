@@ -19,7 +19,7 @@
 ## How to Use
 
 1. Select your DBD installation path (Steam, Epic, or Xbox).
-2. Select your mod repository folder.
+2. Select your mod repository folder (No need to extract the mods).
 3. Choose a theme.
 4. Enable or disable mods using the mod cards or bulk selection options.
 5. Refresh to reload the directory without losing selections.
@@ -39,5 +39,6 @@ Requires **.NET 9.0 (Windows Desktop)**.
 
 A **PakBypass** is required for DBD modding. Get it at:
 [https://isolumia.com/products/pakbypass](https://isolumia.com/products/pakbypass)
+
 
 
