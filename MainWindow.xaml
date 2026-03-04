@@ -1,0 +1,161 @@
+<Window x:Class="DbdModManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        Title="DBD Mod Manager" 
+        Height="760" Width="1100"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="20" BorderThickness="1" BorderBrush="#222" Background="{DynamicResource BackgroundBrush}" ClipToBounds="True" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/> 
+                <RowDefinition Height="*"/>   
+                <RowDefinition Height="70"/>  
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,35,0,0" VerticalAlignment="Top" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" Background="Transparent">
+                <TextBlock Text="Mod Manager" Foreground="{DynamicResource TextBrush}" FontSize="42" FontWeight="ExtraBold" HorizontalAlignment="Center" MouseLeftButtonDown="TitleText_MouseLeftButtonDown" Background="Transparent">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="{DynamicResource GlowColor}" ShadowDepth="0" Opacity="0.6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Text="Makes it easier to manage your mods" Foreground="{DynamicResource MutedTextBrush}" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,0" Opacity="0.8"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,25,0">
+                <Button Content="-" x:Name="MinBtn" Style="{StaticResource IconButtonStyle}" Click="MinimizeButton_Click" Margin="0,0,12,0"/>
+                <Button Content="▢" x:Name="MaxBtn" Style="{StaticResource IconButtonStyle}" Click="MaximizeButton_Click" Margin="0,0,12,0"/>
+                <Button Content="✕" x:Name="CloseBtn" Style="{StaticResource IconButtonStyle}" Click="CloseButton_Click" Background="#2a0000" BorderBrush="#500"/>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="25,0,25,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320"/> 
+                    <ColumnDefinition Width="*"/>   
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="{DynamicResource SecondaryBrush}" CornerRadius="20" BorderThickness="1" BorderBrush="#1a1a1a" Margin="0,0,10,0">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="DIRECTORIES" Foreground="{DynamicResource AccentBrush}" FontWeight="Bold" FontSize="11" Margin="0,0,0,20"/>
+                        <TextBlock Text="STEAM PAKS DIRECTORY" Foreground="{StaticResource MutedTextBrush}" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <DockPanel Margin="0,0,0,15">
+                            <Button DockPanel.Dock="Right" Content="📁" Style="{StaticResource IconButtonStyle}" Width="32" Height="32" Margin="8,0,0,0" Click="BrowseSteam_Click"/>
+                            <TextBox x:Name="SteamPathTxt" Style="{StaticResource ModernTextBoxStyle}" Height="32" FontSize="11"/>
+                        </DockPanel>
+                        <TextBlock Text="EPIC GAMES PAKS DIRECTORY" Foreground="{StaticResource MutedTextBrush}" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <DockPanel Margin="0,0,0,15">
+                            <Button DockPanel.Dock="Right" Content="📁" Style="{StaticResource IconButtonStyle}" Width="32" Height="32" Margin="8,0,0,0" Click="BrowseEpic_Click"/>
+                            <TextBox x:Name="EpicPathTxt" Style="{StaticResource ModernTextBoxStyle}" Height="32" FontSize="11"/>
+                        </DockPanel>
+                        <TextBlock Text="XBOX / MS STORE PAKS DIRECTORY" Foreground="{StaticResource MutedTextBrush}" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <DockPanel Margin="0,0,0,15">
+                            <Button DockPanel.Dock="Right" Content="📁" Style="{StaticResource IconButtonStyle}" Width="32" Height="32" Margin="8,0,0,0" Click="BrowseXbox_Click"/>
+                            <TextBox x:Name="XboxPathTxt" Style="{StaticResource ModernTextBoxStyle}" Height="32" FontSize="11"/>
+                        </DockPanel>
+                        <Separator Background="#222" Margin="0,10,0,20"/>
+                        <TextBlock Text="MODS DIRECTORY" Foreground="{StaticResource MutedTextBrush}" FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <DockPanel Margin="0,0,0,20">
+                            <Button DockPanel.Dock="Right" Content="📁" Style="{StaticResource IconButtonStyle}" Width="32" Height="32" Margin="8,0,0,0" Click="BrowseRepo_Click"/>
+                            <TextBox x:Name="RepoTxt" Style="{StaticResource ModernTextBoxStyle}" Height="32" FontSize="11"/>
+                        </DockPanel>
+                        <TextBlock Text="PLATFORM" Foreground="{DynamicResource AccentBrush}" FontWeight="Bold" FontSize="11" Margin="0,0,0,10" Effect="{DynamicResource PurpleGlowEffect}"/>
+                        <UniformGrid Columns="3" Margin="0,0,0,15">
+                            <RadioButton Content="Steam" IsChecked="True" Style="{StaticResource ModernRadioButtonStyle}" x:Name="SteamRb"/>
+                            <RadioButton Content="Epic" Style="{StaticResource ModernRadioButtonStyle}" x:Name="EpicRb"/>
+                            <RadioButton Content="Xbox" Style="{StaticResource ModernRadioButtonStyle}" x:Name="XboxRb"/>
+                        </UniformGrid>
+                        <CheckBox Content="Auto-clean before apply" Style="{StaticResource ModernCheckBoxStyle}" x:Name="CleanChk" IsChecked="True" Padding="0,0,0,0"/>
+                    </StackPanel>
+                </Border>
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="0,0,0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" x:Name="SearchTxt" Style="{StaticResource ModernTextBoxStyle}" Height="40" Tag="Search mod packs..." TextChanged="SearchTxt_TextChanged" Padding="45,0,10,0"/>
+                                <TextBlock Grid.Column="0" Text="🔍" Foreground="{StaticResource MutedTextBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="18,0,0,0" IsHitTestVisible="False" FontSize="18" Opacity="0.5"/>
+                                <Button Grid.Column="1" Content="🔄" Style="{StaticResource IconButtonStyle}" Height="40" Width="40" Margin="8,0,0,0" Click="RefreshModList_Click" ToolTip="Refresh Mods" FontSize="16"/>
+                                <Button Grid.Column="2" Content="✓" Style="{StaticResource IconButtonStyle}" Height="40" Width="40" Margin="8,0,0,0" Click="EnableAllMods_Click" ToolTip="Enable All Mods" FontSize="18" FontWeight="Bold"/>
+                                <Button Grid.Column="3" Content="✕" Style="{StaticResource IconButtonStyle}" Height="40" Width="40" Margin="8,0,0,0" Click="DisableAllMods_Click" ToolTip="Disable All Mods" FontSize="18" FontWeight="Bold"/>
+                            </Grid>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="15,0,0,0">
+                                <ComboBox x:Name="PresetCombo" Width="150" Height="40" Style="{StaticResource ModernComboBoxStyle}" SelectionChanged="PresetCombo_SelectionChanged"/>
+                                <Button Content="+" Style="{StaticResource IconButtonStyle}" Margin="8,0" Click="AddPreset_Click" ToolTip="New Preset"/>
+                                <Button Content="💾" Style="{StaticResource IconButtonStyle}" Margin="0,0,8,0" Click="SavePreset_Click" ToolTip="Save Preset"/>
+                                <Button Content="🗑" Style="{StaticResource IconButtonStyle}" Click="DeletePreset_Click" ToolTip="Delete Preset"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Style="{StaticResource ModernScrollViewerStyle}">
+                        <ItemsControl x:Name="ModsItemsControl">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel ItemWidth="195" HorizontalAlignment="Left"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource GlowingCardStyle}" Margin="12" Height="145" Width="170" MouseLeftButtonDown="Card_Click" MouseRightButtonDown="Card_RightClick">
+                                        <Grid>
+                                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15">
+                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                                <Border Background="{Binding StatusBrush}" CornerRadius="10" Padding="12,4" Margin="0,15,0,0" HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource TextBrush}" FontSize="9" FontWeight="ExtraBold"/>
+                                                </Border>
+                                            </StackPanel>
+                                            <Ellipse Fill="{Binding StatusBrush}" Width="8" Height="8" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,15,15,0">
+                                                <Ellipse.Effect>
+                                                    <DropShadowEffect BlurRadius="8" Color="{Binding StatusColor}" ShadowDepth="0" Opacity="0.8"/>
+                                                </Ellipse.Effect>
+                                            </Ellipse>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+            <Border Grid.Row="2" Background="{DynamicResource SecondaryBrush}" CornerRadius="0,0,20,20" BorderThickness="0,1,0,0" BorderBrush="#1a1a1a">
+                <Grid Margin="30,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Text="Theme:" Foreground="{DynamicResource MutedTextBrush}" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="12" Opacity="0.5"/>
+                        <ComboBox x:Name="ThemeCombo" Width="130" Height="30" Style="{StaticResource ModernComboBoxStyle}" SelectionChanged="ThemeCombo_SelectionChanged" FontSize="12">
+                            <ComboBoxItem Content="Eclipsed Mode"/>
+                            <ComboBoxItem Content="Isolumia Mode"/>
+                            <ComboBoxItem Content="Girl Mode"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Content="CLEAN MODS" Width="200" Height="42" Style="{StaticResource ActionButtonStyle}" Click="Clean_Click" Background="#1d1d1d" Margin="0,0,15,0"/>
+                        <Button Content="APPLY MODS" Width="200" Height="42" Style="{StaticResource ActionButtonStyle}" Click="Apply_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Image x:Name="ZoePopup" Grid.RowSpan="3" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50" Width="300" Height="500" Opacity="0" IsHitTestVisible="False" Panel.ZIndex="100">
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="40" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+                </Image.Effect>
+                <Image.Clip>
+                    <RectangleGeometry Rect="0,0,300,500" RadiusX="20" RadiusY="20"/>
+                </Image.Clip>
+            </Image>
+        </Grid>
+    </Border>
+</Window>
+
