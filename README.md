@@ -14,6 +14,7 @@
 * **Mod Cleaner**: Removes installed mods (chunks > 6000) without affecting base game files.
 * **Search**: Quickly filter mods in the repository.
 * **Quick Management**: Refresh repository, save presets, and bulk enable/disable mods.
+* **Direct Uninstall**: Uninstall mods directly through the mod manager.
 
 ## How to Use
 
@@ -24,6 +25,7 @@
 5. Refresh to reload the directory without losing selections.
 6. Apply changes to install mods, or use Clean Game to return to vanilla.
 7. Save your current selections as a preset and load them anytime.
+8. Right click mod cards to uninstall unwanted mods from the mods directory.
 
 ## Building from Source
 
@@ -37,4 +39,5 @@ Requires **.NET 9.0 (Windows Desktop)**.
 
 A **PakBypass** is required for DBD modding. Get it at:
 [https://isolumia.com/products/pakbypass](https://isolumia.com/products/pakbypass)
+
 
