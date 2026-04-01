@@ -37,8 +37,7 @@ Requires **.NET 9.0 (Windows Desktop)**.
 ## Modding
 
 A **PakBypass** is required for DBD modding. Get it at:
-[https://isolumia.com/products/pakbypass](https://isolumia.com/products/pakbypass)
-
+https://eclipsed.top/shop
 
 
 
