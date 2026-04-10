@@ -18,7 +18,7 @@
 
 ## How to Use
 
-1. Select your DBD installation path (Steam, Epic, or Xbox).
+1. Select your DBD Paks folder path (Steam, Epic, or Xbox).
 2. Select your mod repository folder (No need to extract the mods).
 3. Enable or disable mods using the mod cards or bulk selection options.
 4. Refresh to reload the directory without losing selections.
